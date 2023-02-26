@@ -1,0 +1,10 @@
+.ipynb_checkpoints/
+Code/obj
+Code/__pycache__
+Code/shooter
+Code/shooter_lib.so
+Notes/main.aux
+Notes/main.log
+Notes/main.out
+Notes/main.pdf
+Notes/main.synctex.gz
