@@ -9,6 +9,11 @@
 // params[3] = phi0
 
 extern "C" int bose_shooter(int d, double *params, double xst, double xend, double omega_st, double omega_end, double *omega, double *delta0){
+	if(d < 2){
+		std::cout << "Only dimensions two or higher are allowed" << std::endl;
+		return 1;
+	}
+
 	Boson_Star_Solver solver(d, params[0], 1.0, params[3], xst, xend);
 	solver.bstar.kappa = params[1];
 	solver.bstar.mass = params[2];
@@ -39,6 +44,11 @@ extern "C" int bose_shooter(int d, double *params, double xst, double xend, doub
 }
 
 extern "C" int get_star_profile(int d, double *params, double xst, double xend, double omega, double delta0, int npoints, double *xarr, double *yarr){
+	if(d < 2){
+		std::cout << "Only dimensions two or higher are allowed" << std::endl;
+		return 1;
+	}
+
 	Boson_Star_Solver solver(d, params[0], omega, params[3], xst, xend);
 	solver.bstar.kappa = params[1];
 	solver.bstar.mass = params[2];
