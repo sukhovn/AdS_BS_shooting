@@ -41,6 +41,7 @@ int main(int argc, char const *argv[]){
 	}
 
 	double phi0 = 0.1, omega = 3.3;
+	double el = 0.1;
 
 	for(int i = 1; i < argc; i++){
 		if(strcmp(argv[i], "-phi0") == 0){
@@ -51,6 +52,10 @@ int main(int argc, char const *argv[]){
 			omega = atof(argv[i+1]);
 			i++;
 		}
+		else if(strcmp(argv[i], "-el") == 0){
+			el = atof(argv[i+1]);
+			i++;
+		}
 		else{
 			std::cout << "Unknown key received" << std::endl;
 			return 0;
@@ -59,9 +64,10 @@ int main(int argc, char const *argv[]){
 
 	int npoints = 501;
 	double *xarr = new double[npoints];
-	double *yarr = new double[4*npoints];
+	double *yarr = new double[6*npoints];
 
 	Boson_Star_Solver solver(3, 1.0, omega, phi0, 0.001, 1.3);
+	solver.bstar.el = el;
 
 	try{
 		solver.shoot_for_omega(3.0, 4.0);
@@ -87,7 +93,7 @@ int main(int argc, char const *argv[]){
 	std::cout << "Omega found: " << solver.bstar.omega << std::endl;
 	
 	solver.integrate_bose_star(npoints, xarr, yarr);
-	save_grid("Data/solution.dat", 4, npoints, xarr, yarr);
+	save_grid("Data/solution.dat", 6, npoints, xarr, yarr);
 
 	return 0;
 }

@@ -26,16 +26,19 @@
 
 \begin{document}
 \section{Boson Star equations}
-We take following scalar field theory
+We take the following scalar field theory
 \begin{equation}
-S = \int\left[\frac{R + 2\Lambda}{2\kappa} - |\partial_\mu \phi|^2 - V(|\phi|^2) \right]\sqrt{-g} d^4 x.
+S = \int\left[\frac{R + 2\Lambda}{2\kappa} - \frac{1}{4}F_{\mu\nu} F^{\mu\nu} - |D_\mu \phi|^2 - V(|\phi|^2) \right]\sqrt{-g} d^4 x,
 \end{equation}
+where $D_\mu\phi = \partial_\mu\phi - i e A_\mu\phi$.
 The equations of motions then become
 \begin{subequations}
 \begin{align}
-	&R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} - \Lambda g_{\mu\nu} = \kappa T_{\mu\nu},\\
-	&T_{\mu\nu} = \partial_\mu \phi^* \partial_\nu \phi + \partial_\nu \phi^* \partial_\mu \phi - g_{\mu\nu}(|\partial_\alpha \phi|^2 + V(|\phi|^2)),\\
-	&\square \phi - \frac{dV}{d |\phi|^2} \phi = 0.
+	&R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} - \Lambda g_{\mu\nu} = \kappa T_{\mu\nu} = \kappa (T_{\mu\nu}^\phi + T_{\mu\nu}^{em}),\\
+	&T_{\mu\nu}^\phi = (D_\mu \phi)^* D_\nu \phi + (D_\nu \phi)^* D_\mu \phi - g_{\mu\nu}(|D_\alpha \phi|^2 + V(|\phi|^2)),\\
+	&T_{\mu\nu}^{em} = F_{\mu\alpha} F^{\;\alpha}_\nu - \frac{1}{4} g_{\mu\nu }F_{\alpha\beta}F^{\alpha\beta},\\
+	&D^2 \phi - \frac{dV}{d |\phi|^2} \phi = 0,\qquad D^2\phi = g^{\mu\nu} D_\mu D_\nu \phi,\\
+	&\triangledown_\mu F^{\mu\nu} = j^\nu = i e (\phi^* D^\nu \phi - (D^\nu\phi)^* \phi).
 \end{align}
 \end{subequations}
 We adopt the following metric ansatz 
@@ -43,20 +46,28 @@ We adopt the following metric ansatz
 	\label{eq:AdSAnsatz}
 	ds^2 = \frac{l^2}{\cos^2 x}\left(- A(x) e^{-2\delta(x)} dt^2 + A(x)^{-1} dx^2 + \sin^2 x d\Omega^2_{d-1}\right),
 \end{equation}
-and the following scalar field ansatz
+the following scalar field ansatz
 \begin{equation}
-	\phi = \phi_0(x) e^{i\omega t}.
+	\phi = \phi_0(x) e^{i\omega t},
+\end{equation}
+and the following vector potential ansatz
+\begin{equation}
+	A_\mu = \{a(x),0,\dots\}
 \end{equation}
 The scalar field equation then becomes
 \begin{equation}
-	\phi_0'' + \left(\frac{A'}{A} - \delta + \frac{(d-1)}{\sin x \cos x}\right)\phi_0' + \frac{1}{A}\left(\frac{1}{A}e^{2\delta}\omega^2 - \frac{l^2}{\cos^2 x } U_0\right) \phi_0 = 0,\qquad U_0 = \frac{d V}{d |\phi|^2}.
+	\phi_0'' + \left(\frac{A'}{A} - \delta' + \frac{(d-1)}{\sin x \cos x}\right)\phi_0' + \frac{1}{A}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2 - \frac{l^2}{\cos^2 x } U_0\right) \phi_0 = 0,\qquad U_0 = \frac{d V}{d |\phi|^2}.
+\end{equation}
+The gauge field equation becomes
+\begin{equation}
+	a''(x) + \left(\delta' + \frac{2\cos^2 x + d - 3}{\sin x \cos x}\right) a' + e\frac{2 l^2}{A\cos^2 x} (\omega - e a) \phi_0^2 = 0.
 \end{equation}
 The stress-energy tensor becomes
 \begin{subequations}
 \begin{align}
-	&\rho = -T^t_t = \frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}\omega^2 \phi_0^2 + A(\phi_0')^2\right) + V,\\
-	&p_r = T^x_x = \frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}\omega^2 \phi_0^2 + A(\phi_0')^2\right) - V,\\
-	&p_\theta = T^i_i = \frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}\omega^2 \phi_0^2 - A(\phi_0')^2\right) - V,\qquad i \notin \{t, x\}.\\
+	&\rho = -T^t_t = \frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2 \phi_0^2 + A(\phi_0')^2\right) + V + \frac{\cos^4 x}{2l^4} e^{2\delta} (a')^2,\\
+	&p_r = T^x_x = \frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2 \phi_0^2 + A(\phi_0')^2\right) - V - \frac{\cos^4 x}{2l^4} e^{2\delta} (a')^2,\\
+	&p_\theta = T^i_i = \frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2 \phi_0^2 - A(\phi_0')^2\right) - V + \frac{\cos^4 x}{2l^4} e^{2\delta} (a')^2,\qquad i \notin \{t, x\}.\\
 \end{align}
 \end{subequations}
 
@@ -129,25 +140,43 @@ Substituting the metric \eqref{eq:AdSAnsatz} into the equations \eqref{eq:GEinst
 \begin{subequations}
 \label{eq:StarEOM}
 \begin{align}
-	&A'(x) = - \frac{d - 2 \cos^2 x}{\sin x \cos x}\left(A - 1\right) - \frac{2 \kappa \sin x \cos x}{d - 1} \left(\frac{e^{2\delta}}{A}\omega^2 \phi_0^2 + A(\phi_0')^2\right) - \frac{2 \kappa l^2 \tan x}{d - 1} V,\\
-	&\delta'(x) = -\frac{2\kappa \sin x \cos x}{d - 1} \left(\frac{e^{2\delta}}{A^2}\omega^2 \phi_0^2 + (\phi_0')^2\right),\\
+	&A'(x) = - \frac{d - 2 \cos^2 x}{\sin x \cos x}\left(A - 1\right) - \frac{2 \kappa \sin x \cos x}{d - 1} \left(\frac{e^{2\delta}}{A}(\omega - e a)^2 \phi_0^2 + A(\phi_0')^2 + \frac{\cos^2 x}{2l^2} e^{2\delta} (a')^2\right)\\\nonumber
+	&\qquad - \frac{2 \kappa l^2 \tan x}{d - 1} V,\\
+	&\delta'(x) = -\frac{2\kappa \sin x \cos x}{d - 1} \left(\frac{e^{2\delta}}{A^2}(\omega - e a)^2 \phi_0^2 + (\phi_0')^2\right),\\
 	\label{eq:ScalarEOM}
-	&\phi_0'' + \left(\frac{A'}{A} - \delta + \frac{(d-1)}{\sin x \cos x}\right)\phi_0' + \frac{1}{A}\left(\frac{1}{A}e^{2\delta}\omega^2 - \frac{l^2}{\cos^2 x } U_0\right) \phi_0 = 0,\qquad U_0 = \frac{d V}{d |\phi|^2},
+	&\phi_0'' + \left(\frac{A'}{A} - \delta' + \frac{(d-1)}{\sin x \cos x}\right)\phi_0' + \frac{1}{A}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2 - \frac{l^2}{\cos^2 x } U_0\right) \phi_0 = 0,\qquad U_0 = \frac{d V}{d |\phi|^2},\\
+	&a''(x) + \left(\delta' + \frac{2\cos^2 x + d - 3}{\sin x \cos x}\right) a' + e\frac{2 l^2}{A\cos^2 x} (\omega - e a) \phi_0^2 = 0.
 \end{align}
 \end{subequations}
 
-\subsection{Empty space solution}
-If we assume that no star is present $\phi_0(x) = 0$, the equations \eqref{eq:StarEOM} admit the following empty space solution $\delta(x) = 0$ and
+\subsection{Point charge solution}
+If we assume that no star is present $\phi_0(x) = 0$, the equations \eqref{eq:StarEOM} admit the following solution $\delta(x) = 0$ and
+\begin{subequations}
+\label{eq:PointCharge}
+\begin{align}
+	&a(x) = \frac{Q l}{(d-2)}\frac{1}{\tan^{d-2} x},\\
+	&A(x) = 1 - \frac{2 M}{l^{d-2}} \frac{\cos^2 x}{\tan^{d-2} x} + \frac{\kappa Q^2}{(d-1)(d-2)} \frac{\cos^2 x}{\tan^{2(d-2)} x}.
+\end{align}
+\end{subequations}
+This solution corresponds to a $(d+1)$-dimensional Reissner-Nordstr\"{o}m black hole with mass $M$ and charge $Q$ in AdS spacetime. By taking $r = l \tan x$ and $\tau = l t$ we can transform this solution to ordinary Schwarzschild coordinates
 \begin{equation}
-	A(x) = 1 - \frac{2 M}{l^{d-2}} \frac{\cos^2 x}{\tan^{d-2} x}.
-\end{equation}
-This solution corresponds to a $(d+1)$-dimensional Schwarzschild black hole with mass $M$ in AdS spacetime. By taking $r = l \tan x$ and $\tau = l t$ we can transform this solution to ordinary Schwarzschild coordinates
-\begin{equation}
-	ds^2 = - \left(1 - \frac{2M}{r^{d-2}} + \frac{r^2}{l^2}\right) d\tau^2 + \frac{dr^2}{1 - \frac{2M}{r^{d-2}} + \frac{r^2}{l^2}} + r^2 d \Omega^2_{d-1}.
+\begin{split}
+	&ds^2 = - F(r) d\tau^2 + \frac{dr^2}{F(r)} + r^2 d \Omega^2_{d-1},\\
+	&F(r) = 1 - \frac{2M}{r^{d-2}} + \frac{\kappa Q^2}{(d-1)(d-2)}\frac{1}{r^{2(d-2)}} + \frac{r^2}{l^2}.
+\end{split}
 \end{equation}
 
+\subsubsection{Case $d = 2$}
+Case $d = 2$ deserves a special treatment. In this case both the electric potential and the metric become logarithmic in $x$.
+\begin{subequations}
+	\begin{align}
+		&a(x) = Q\log(\tan x),\\
+		&A(x) = 1 - 2 M \cos^2 x + \frac{\kappa Q^2}{l^2} (\cos^2 x) \log(\tan x).
+	\end{align}
+\end{subequations}
+
 \section{Regular solutions for scalar field equation}
-In the absence of gravity scalar field equation \eqref{eq:ScalarEOM} becomes
+In the absence of gravity and electromagnetic field the scalar field equation \eqref{eq:ScalarEOM} becomes
 \begin{equation}
 	\phi_0'' + \frac{(d-1)}{\sin x \cos x}\phi_0' + \left(\omega^2 - \frac{l^2}{\cos^2 x } U_0\right) \phi_0 = 0,\qquad U_0 = \frac{d V}{d |\phi|^2}.
 \end{equation}
@@ -194,40 +223,65 @@ The fundamental mode corresponds to $j = 0$
 We introduce a new coordinate $\rho = \pi/2 - x$. If we expand the solution in terms or $\rho$ around $\rho = 0$ we get
 \begin{subequations}
 \begin{align}
-	&A(\rho) = 1 + A^{(0)}\left(1 + \frac{d-3}{3}\rho^2\right) \rho^d + \frac{4\kappa n(n-1)}{(2n - d)(d-1)}(\phi^{(0)})^2 \rho^{2n} + O(\rho^{d+4}) + O(\rho^{2n+2}),\\
-	&\delta = \frac{\kappa n\phi_0^2}{d-1} \rho^{2n} + O(\rho^{2n+2}),\\
-	&\phi_0(\rho) = \phi^{(0)} \rho^{n} \left(1 + \frac{n(n + d - 2 - 3 n A^{(0)} \delta_{d,2} ) - 3\omega^2}{6(2(n+1) - d)} \rho^2\right) + O(\rho^{n+4}),
+	&A(\rho) = 1 + A^{(0)}\left(1 + \frac{d-3}{3}\rho^2\right) \rho^d + (a^{(1)})^2\frac{\kappa (d-2) e^{2\delta_0}}{l^2 (d-1)}\left(1 + \frac{2d-5}{3}\rho^2\right) \rho^{2d-2} + \\\nonumber
+	&\qquad\qquad (\phi^{(0)})^2 \frac{2\kappa n^2}{(2n - d)(d-1)} \rho^{2n} + O(\rho^{d+4}) + O(\rho^{2d+2}) + O(\rho^{2n+2}),\\
+	&\delta(\rho) = \delta_0 + \frac{\kappa n(\phi^{(0)})^2}{d-1} \rho^{2n} + O(\rho^{2n+2}),\\
+	&\phi_0(\rho) = \phi^{(0)} \rho^{n} \left(1 + \frac{n(n + d - 2) - 3e^{2\delta_0}(\omega - e a^{(0)})^2}{6(2(n+1) - d)} \rho^2 - \frac{A^{(0)}\rho^d}{2}\right) + O(\rho^{n+4}),\\
+	&a(\rho) = a^{(0)} + a^{(1)}\left(1 + \frac{d-2}{3}\rho^2\right)\rho^{d-2} + O(\rho^{d+2}).
 \end{align}
 \end{subequations}
-where we label $V'(0) = m^2$, $\delta_{d,2}$ is a Kronecker delta, and
+where we label $V'(0) = m^2$ is a Kronecker delta, and
 \begin{equation}
-	n = 2\alpha_+ = \frac{d}{2} + \frac{1}{2}\sqrt{d^2 + 4 l^2 m^2}
+	n = \frac{d}{2} + \frac{1}{2}\sqrt{d^2 + 4 l^2 m^2}
 \end{equation}
-We have absorbed $\delta(0)$ in the definition of $\omega$, $A^{(0)}$ and $\phi^{(0)}$ serve as free parameters. The system \eqref{eq:StarEOM} has a non-singular solution only when $V(0) = 0$.
+We compare the expressions with asymptotic expressions for point charge and see that $A^{(0)}$ corresponds to star mass and $a^{(1)}$ corresponds to star charge
+\begin{equation}
+	A^{(0)} = - \frac{2 M}{l^{d-2}},\qquad a^{(1)} =\frac{Q l}{d-2}.
+\end{equation}
 
-These equations can be recast in the following form, allowing to obtain $\phi^{0}$ and $A^{(0)}$
+We now develop a method to reconstruct asymptotic coefficients from function values at a certain point $\rho$. We introduce the following notations
+\begin{equation}
+	A_0 = A^{(0)}\rho^d,\qquad a_0 = a^{(0)},\qquad a_1 = a^{(1)}\rho^{d-2},\qquad \phi_0 = \phi^{(0)}\rho^n.
+\end{equation}
+We begin by reconstructing $a_0$ and $a_1$ as
 \begin{subequations}
 \begin{align}
-	&A(\rho) - 1 = \left(1 + \frac{d-3}{3}\rho^2\right) (\rho^d A^{(0)}) + \frac{4\kappa n(n-1)}{(2n - d)(d-1)}(\rho^{n}\phi^{(0)})^2,\\
-	&\phi_0(\rho) = \left(1 + \frac{n(n+d-2) - 3\omega^2}{6(2(n+1) - d)} \rho^2\right) (\rho^n\phi^{(0)}) - \frac{3 n^2 \delta_{d,2} }{6(2(n+1) - d)} (\rho^d A^{(0)})(\rho^{n}\phi^{(0)}).
+	&a_1 = \frac{\rho a'(\rho)}{(d-2)\left(1 + \frac{d}{3}\rho^2\right)},\\
+	&a_0 = a(\rho) - a_1\left(1 + \frac{d-2}{3}\rho^2\right).
 \end{align}
 \end{subequations}
-We label $x = \rho^d A^{(0)}$ and $y = \rho^{n}\phi^{(0)}$ and 
+Within the assumed order of approximation we can take
+\begin{equation}
+	e^{2\delta_0} = e^{2\delta(\rho)}\left(1 - \frac{2\kappa n}{d-1} \phi_0^2\right).
+\end{equation}
+We can obtain $A_0$ from the expression
+\begin{equation}
+\label{eq:A_asym_expr}
+	A(\rho) = 1 + A_0\left(1 + \frac{d-3}{3}\rho^2\right) + e^{2\delta_0} b_4 a_1^2 \left(1 + \frac{2d-5}{3}\rho^2\right) \rho^{2} + b_5\phi_0^2,
+\end{equation}
+where
+\begin{equation}
+	b_4 = \frac{\kappa (d-2)}{l^2 (d-1)},\qquad b_5 = \frac{2\kappa n^2}{(2n - d)(d-1)}.
+\end{equation}
+
+Substituting this expression into $\phi_0(\rho)$ asymptotic and taking the leading asymptotic to get $A^0$ we get a cubic equation for $\phi_0$
+\begin{equation}
+	\phi_0(\rho) = \phi_0 \left(1 + b_1\rho^2 - e^{2\delta_0} b_2\rho^2 - \frac{1}{2} A_0\right)
+\end{equation}
+where
+\begin{equation}
+	b_1 = \frac{n(n + d - 2)}{6(2(n+1) - d)},\qquad b_2 = \frac{(\omega - e a_0)^2}{2(2(n+1) - d)},\qquad b_3 = \frac{\kappa n}{d-1}.
+\end{equation}
+we get a cubic equation for $\phi_0$
 \begin{equation}
 \begin{split}
-	&a_1 = 1 + \frac{d-3}{3}\rho^2,\quad a_2 = \frac{4\kappa n(n-1)}{(2n - d)(d-1)},\\
-	&b_1 = \frac{n(n+d-2) - 3\omega^2}{6(2(n+1) - d)},\quad b_2 = \frac{3 n^2}{6(2(n+1) - d)}.
+	&\left(2 b_2 b_3 e^{2\delta(\rho)}\rho^2 + \frac{b_5}{2(1 + (d-3)\rho^2/3)}\right)\phi_0^3 + \\
+	&\qquad\left(1 + (b_1 - b_2 e^{2\delta(\rho)})\rho^2 - \frac{A(\rho) - 1 - e^{2\delta(\rho)} b_4 a_1^2 (1 + (2d - 5)\rho^2/3)\rho^2}{2(1 + (d-3)\rho^2/3)}\right)\phi_0 = \phi_0(\rho),
 \end{split}
 \end{equation}
-The system then becomes
-\begin{subequations}
-\begin{align}
-	&x = \frac{1}{a_1} (A(\rho) - 1 - a_2 y^2),\\
-	&\delta_{d,2} \frac{a_2 b_2}{a_1} y^3 + \left(1 + b_1 \rho^2 - \delta_{d,2}\frac{b_2}{a_1}(A(\rho) - 1)\right)y - \phi_0(\rho)=0.
-\end{align}
-\end{subequations}
-Finding $x$ and $y$ allows us to find solution around $x = \pi/2$ from the asymptotic as well as implement shooting by adjusting $\phi'_0(\rho)$
+This cubic equation can be solved for $\phi_0$ after which $\delta_0$ is obtained as
 \begin{equation}
-	\phi_0'(\rho) = \left(\frac{n}{\rho} + (n+2) b_1 \rho\right) y - \delta_{d,2} b_2 \frac{n + 2}{\rho} x y.
+	\delta_0 = \delta(\rho) - b_3 \phi_0^2,
 \end{equation}
+and $A_0$ can be found from the expression \eqref{eq:A_asym_expr}.
 \end{document}
