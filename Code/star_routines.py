@@ -26,7 +26,7 @@ get_star_profile_cpp.argtypes = [ctypes.c_int, ctl.ndpointer(np.float64, flags='
 get_star_profile_cpp.restype = ctypes.c_int
 
 class Bose_Star_Solver:
-    def __init__(self, d = 3, l = 1.0, kappa = 1.0, el=0.1, mass = 0.0, phi0 = 0.1, xrange = [0.001, 1.4]):
+    def __init__(self, d = 3, l = 1.0, kappa = 1.0, el = 0.1, mass = 0.0, phi0 = 0.1, xrange = [0.001, 1.4]):
         self.d = d
         self.params = np.array([l, kappa, mass, el, phi0])
         self.xrange = xrange
@@ -81,5 +81,3 @@ class Bose_Star_Solver:
         ax = plt.subplot(224)
         ax.set_title("$a(x)$")
         ax.plot(self.coords, self.fields[:,4])
-
-        plt.show()

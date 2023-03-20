@@ -59,7 +59,7 @@ public:
 		if(bstar.el == 0)
 			star_charge = 0.0;
 		else
-			star_charge = (bstar.d-2)*asym_bound.a1/bstar.l/std::pow(asym_bound.rho, bstar.d-2);
+			star_charge = (bstar.d-2)*asym_bound.a1/bstar.l/std::pow(asym_bound.rho, bstar.d-2)/bstar.el;
 
  		delete [] xint;
  		delete [] yint;
@@ -101,12 +101,13 @@ public:
 				break;
 
 			// Dynamically adjusting delta0 and a0
-			omega_st -= bstar.el*a0_diff;
-			omega_end -= bstar.el*a0_diff;
-			a0 -= a0_diff;
-			delta0 -= delta_diff;
-			omega_st *= std::exp(delta_diff);
-			omega_end *= std::exp(delta_diff);
+			// omega_st -= bstar.el*a0_diff;
+			// omega_end -= bstar.el*a0_diff;
+			// a0 -= a0_diff;
+			// delta0 -= delta_diff;
+			// omega_st *= std::exp(delta_diff);
+			// omega_end *= std::exp(delta_diff);
+			// a0 *= std::exp(delta_diff);
 		}
 
 		if(at == SHOOT_TRIES){
@@ -116,6 +117,13 @@ public:
 			std::cout << "Shooting didn't converge" << std::endl;
 			throw("shooting didn't converge");
 		}
+
+		// Adjusting delta0 and a0
+		bstar.omega -= bstar.el*a0_diff;
+		a0 -= a0_diff;
+		delta0 -= delta_diff;
+		bstar.omega *= std::exp(delta_diff);
+		a0 *= std::exp(delta_diff);
 	
 		return;
 	}

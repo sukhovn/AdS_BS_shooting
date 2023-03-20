@@ -68,9 +68,10 @@ int main(int argc, char const *argv[]){
 
 	Boson_Star_Solver solver(3, 1.0, omega, phi0, 0.001, 1.3);
 	solver.bstar.el = el;
+	double omega_st = 3.0, omega_end = 4.0;
 
 	try{
-		solver.shoot_for_omega(3.0, 4.0);
+		solver.shoot_for_omega(omega_st, omega_end);
 	}
 	catch(const char *error){
 		printf("Error code: %s\n", error);
