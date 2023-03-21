@@ -200,17 +200,17 @@ public:
 		}
 
 		double evaluate_dphi(){
-			return -(np/rho + (np + 2.0)*(b1 - b2)*rho)*phi0;
+			return -(np/rho + (np+2.0)*(b1 - b2)*rho - 0.5*(np+da)*A0/rho)*phi0;
 		}
 
 		void evaluate(double xa, double *ya){
 			double rhoa = M_PI_2 - xa;
 			double rho_frac = rhoa/rho;
 			ya[0] = 1.0 + A0*(1.0 + (da - 3.0)/3.0*rhoa*rhoa)*std::pow(rho_frac, da) + b5*std::pow(rho_frac, 2.0*np)*phi0*phi0 +
-					b4*(1.0 + (2.0*da - 5.0)/3.0*rhoa*rhoa)*SQR(a1*rho)*std::pow(rho_frac, 2.0*da-2.0);
+					b4*(1.0 + (2.0*da - 5.0)/3.0*rhoa*rhoa)*SQR(a1*rhoa)*std::pow(rho_frac, 2.0*da-2.0);
 			ya[1] = del0 + b3*phi0*phi0*std::pow(rho_frac, 2.0*np);
-			ya[2] = (1.0 + (b1 - b2)*rhoa*rhoa - 0.5*A0)*phi0*std::pow(rho_frac, np);
-			ya[3] = -(np/rho + (np+2.0)*(b1 - b2)*rhoa*rhoa/rho - 0.5*(np + da)*A0/rho)*std::pow(rho_frac, np-1.0)*phi0;
+			ya[2] = (1.0 + (b1 - b2)*rhoa*rhoa - 0.5*A0*std::pow(rho_frac, da))*phi0*std::pow(rho_frac, np);
+			ya[3] = -(np/rho + (np+2.0)*(b1 - b2)*rhoa*rho_frac - 0.5*(np + da)*A0*std::pow(rho_frac, da)/rho)*std::pow(rho_frac, np-1.0)*phi0;
 			if(da > 2){
 				ya[4] = a0 + a1*(1.0 + (da - 2.0)/3.0*rhoa*rhoa)*std::pow(rho_frac, da-2.0);
 				double tmp = (da == 3.0 ? 1.0 : std::pow(rho_frac, da-3.0));

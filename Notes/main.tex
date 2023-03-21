@@ -31,7 +31,7 @@ We take the following scalar field theory
 S = \int\left[\frac{R + 2\Lambda}{2\kappa} - \frac{1}{4}F_{\mu\nu} F^{\mu\nu} - |D_\mu \phi|^2 - V(|\phi|^2) \right]\sqrt{-g} d^4 x,
 \end{equation}
 where $D_\mu\phi = \partial_\mu\phi - i e A_\mu\phi$.
-The equations of motions then become
+The equations of motion corresponding to the Lagrangian are
 \begin{subequations}
 \begin{align}
 	&R_{\mu\nu} - \frac{1}{2}R g_{\mu\nu} - \Lambda g_{\mu\nu} = \kappa T_{\mu\nu} = \kappa (T_{\mu\nu}^\phi + T_{\mu\nu}^{em}),\\
@@ -46,7 +46,7 @@ We adopt the following metric ansatz
 	\label{eq:AdSAnsatz}
 	ds^2 = \frac{l^2}{\cos^2 x}\left(- A(x) e^{-2\delta(x)} dt^2 + A(x)^{-1} dx^2 + \sin^2 x d\Omega^2_{d-1}\right),
 \end{equation}
-the following scalar field ansatz
+where $l^2 = \frac{d(d-1)}{2 \Lambda}$, the following scalar field ansatz
 \begin{equation}
 	\phi = \phi_0(x) e^{i\omega t},
 \end{equation}
@@ -72,14 +72,14 @@ The stress-energy tensor becomes
 \end{subequations}
 
 \subsection{Metric decomposition}
-Getting the metric part in arbitrary number of dimensions is harder. However, the following trick can be used. If the metric can be represented in the following form
+Getting the metric part in arbitrary number of dimensions is a harder problem. However, the following trick can be employed. If the metric can be represented in the following form
 \begin{equation}
 g_{\mu\nu} =\begin{pmatrix}
 	f_{ab}(x) & 0 \\
 	0 & h_{ij}(y)
 \end{pmatrix},
 \end{equation}
-when $f_{ab}$ is a $d_1$ dimensional metric which is a function of the first $d_1$ coordinates and $h_{ij}$ is $d_2$ dimensional metric which is a function of last $d_2$ coordinates, then Ricci tensor for this metric trivially becomes
+where $f_{ab}$ is a $d_1$ dimensional metric which is a function of the first $d_1$ coordinates and $h_{ij}$ is $d_2$ dimensional metric which is a function of last $d_2$ coordinates, then the Ricci tensor for this metric trivially becomes
 \begin{equation}
 	R_{\mu\nu} =\begin{pmatrix}
 		R^f_{ab} & 0 \\
@@ -117,7 +117,7 @@ therefore an arbitrary spherically symmetric spacetime with a metric
 \begin{equation}
 	ds^2 = f_{ab} dx^a dx^b + e^{2\omega} d\Omega^2_{d-1},
 \end{equation}
-has a Ricci tensor
+has the Ricci tensor
 \begin{subequations}
 	\begin{align}
 		&R^1_{ab} = R^f_{ab} - (d-1)(\triangledown_a \triangledown_b\omega + \partial_a\omega\partial_b\omega),\\
@@ -220,7 +220,7 @@ The fundamental mode corresponds to $j = 0$
 
 \section{Asymptotic expansion}
 \subsection{Boundary case $x = \pi/2$}
-We introduce a new coordinate $\rho = \pi/2 - x$. If we expand the solution in terms or $\rho$ around $\rho = 0$ we get
+We introduce a new coordinate $\rho = \pi/2 - x$. If we expand the solution in terms of $\rho$ around $\rho = 0$ we get
 \begin{subequations}
 \begin{align}
 	&A(\rho) = 1 + A^{(0)}\left(1 + \frac{d-3}{3}\rho^2\right) \rho^d + (a^{(1)})^2\frac{\kappa (d-2) e^{2\delta_0}}{l^2 (d-1)}\left(1 + \frac{2d-5}{3}\rho^2\right) \rho^{2d-2} + \\\nonumber
@@ -230,11 +230,11 @@ We introduce a new coordinate $\rho = \pi/2 - x$. If we expand the solution in t
 	&a(\rho) = a^{(0)} + a^{(1)}\left(1 + \frac{d-2}{3}\rho^2\right)\rho^{d-2} + O(\rho^{d+2}).
 \end{align}
 \end{subequations}
-where we label $V'(0) = m^2$ is a Kronecker delta, and
+where we label $V'(0) = m^2$ and
 \begin{equation}
 	n = \frac{d}{2} + \frac{1}{2}\sqrt{d^2 + 4 l^2 m^2}
 \end{equation}
-We compare the expressions with asymptotic expressions for point charge and see that $A^{(0)}$ corresponds to star mass and $a^{(1)}$ corresponds to star charge
+We compare the expressions with asymptotic expressions for point charge and see that $A^{(0)}$ corresponds to the star mass and $a^{(1)}$ corresponds to the star charge
 \begin{equation}
 	A^{(0)} = - \frac{2 M}{l^{d-2}},\qquad a^{(1)} =\frac{Q l}{d-2}.
 \end{equation}

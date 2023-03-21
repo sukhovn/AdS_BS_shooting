@@ -59,7 +59,7 @@ public:
 		if(bstar.el == 0)
 			star_charge = 0.0;
 		else
-			star_charge = (bstar.d-2)*asym_bound.a1/bstar.l/std::pow(asym_bound.rho, bstar.d-2)/bstar.el;
+			star_charge = (bstar.d-2)*asym_bound.a1/bstar.l/std::pow(asym_bound.rho, bstar.d-2)*std::exp(asym_bound.del0)/bstar.el;
 
  		delete [] xint;
  		delete [] yint;
@@ -124,7 +124,7 @@ public:
 		delta0 -= delta_diff;
 		bstar.omega *= std::exp(delta_diff);
 		a0 *= std::exp(delta_diff);
-	
+
 		return;
 	}
 
