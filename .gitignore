@@ -9,3 +9,6 @@ Notes/main.out
 Notes/main.pdf
 Notes/main.synctex.gz
 Plots/
+Code/Modes/obj/
+Code/mode_lib.so
+Code/Modes/solver

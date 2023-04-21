@@ -5,6 +5,7 @@ CFLAGS = -c -O3 -I. -IRoutines #-Wall -Werror -Wextra -pedantic# flags to use at
 LINKERFLAG = -lm
 
 all: prog
+	(cd Modes; make)
 
 prog: obj/bose_shooter.o obj/shooter_lib.o
 	${CC} -o shooter $(LIB_BINS) obj/bose_shooter.o ${LINKERFLAG}
@@ -28,3 +29,4 @@ clean:
 	rm -rvf Data
 	rm -vf shooter
 	rm -vf shooter_lib.so
+	(cd Modes; make clean)

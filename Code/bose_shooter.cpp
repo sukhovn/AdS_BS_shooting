@@ -96,5 +96,8 @@ int main(int argc, char const *argv[]){
 	solver.integrate_bose_star(npoints, xarr, yarr);
 	save_grid("Data/solution.dat", 6, npoints, xarr, yarr);
 
+	delete [] xarr;
+	delete [] yarr;
+
 	return 0;
 }
