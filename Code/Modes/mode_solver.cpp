@@ -74,7 +74,7 @@ int main(int argc, char const *argv[]){
 	star_perturbations.evaluate_unperturbed_fields(n);
 	// save_grid("test_save.csv", 6, n, star_perturbations.star_profile.xarr, star_perturbations.star_profile.yarr);
 
-	SpectrumSolver solver(&star_perturbations, n);
+	SpectrumSolver<Boson_Star_Perturbations> solver(&star_perturbations, n);
 	solver.compute_spectrum(true);
 	solver.summary();
 	// solver.save_real_eigenvalues_csv("eigenvectors.csv");

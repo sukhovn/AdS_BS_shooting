@@ -43,7 +43,7 @@ extern "C" int bose_mode_frequency(int d, double *params, int npoints, double xs
 		}
 	}
 
-	SpectrumSolver solver(&star_perturbations, npoints);
+	SpectrumSolver<Boson_Star_Perturbations> solver(&star_perturbations, npoints);
 	solver.compute_spectrum(true);
 
 	if(solver.real_freq.size() < nmodes){
@@ -92,7 +92,7 @@ extern "C" int bose_mode_profiles(int d, double *params, int npoints, double xst
 		}
 	}
 
-	SpectrumSolver solver(&star_perturbations, npoints);
+	SpectrumSolver<Boson_Star_Perturbations> solver(&star_perturbations, npoints);
 	solver.compute_spectrum(true);
 
 	if(solver.real_freq.size() < nmodes){

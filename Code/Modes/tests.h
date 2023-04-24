@@ -238,7 +238,7 @@ void spectrum_solver_test(int argc, char const *argv[]){
 	}
 
 	Simple_Oscillator osc;
-	SpectrumSolver solver(&osc, n);
+	SpectrumSolver<Simple_Oscillator> solver(&osc, n);
 
 	solver.compute_spectrum();
 	solver.summary();
@@ -266,7 +266,7 @@ void spectrum_solver_test(int argc, char const *argv[]){
 	std::cout << "g' + omega^2 f = 0\n" << std::endl;
 
 	First_Order_Oscillator osc_first;
-	SpectrumSolver solver_first(&osc_first, n);
+	SpectrumSolver<First_Order_Oscillator> solver_first(&osc_first, n);
 
 	solver_first.compute_spectrum(true);
 	solver_first.summary();
