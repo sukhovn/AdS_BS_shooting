@@ -46,23 +46,15 @@ extern "C" int bose_mode_frequency(int d, double *params, int npoints, double xs
 	SpectrumSolver solver(&star_perturbations, npoints);
 	solver.compute_spectrum(true);
 
-	std::vector<int> modes_select;
-	int indx = 0;
-	for(int i = 0; i < solver.real_freq.size(); ++i){
-		if(std::fabs(solver.real_freq[i]) < 1.0e-5)
-			continue;
-		modes_select.push_back(i);
-		frequencies[indx++] = solver.real_freq[i];
-		if(indx == nmodes)
-			break;
-	}
-
-	if(indx < nmodes){
-		std::cout << "Warning! Not enough modes obtained, consider increasing resolution." << std::endl;
+	if(solver.real_freq.size() < nmodes){
+		std::cout << "Not enough modes obtained, consider increasing resolution." << std::endl;
 		return 1;
 	}
 
-	solver.eigenvectors_precision(modes_select, precision);
+	for(int i = 0; i < nmodes; ++i)
+		frequencies[i] = solver.real_freq[i];
+
+	solver.eigenvectors_precision(nmodes, precision);
 
 	return 0;
 }
@@ -103,31 +95,24 @@ extern "C" int bose_mode_profiles(int d, double *params, int npoints, double xst
 	SpectrumSolver solver(&star_perturbations, npoints);
 	solver.compute_spectrum(true);
 
-	std::vector<int> modes_select;
-	int indx = 0;
-	for(int i = 0; i < solver.real_freq.size(); ++i){
-		if(std::fabs(solver.real_freq[i]) < 1.0e-5)
-			continue;
-		modes_select.push_back(i);
-		frequencies[indx++] = solver.real_freq[i];
-		if(indx == nmodes)
-			break;
-	}
-
-	if(indx < nmodes){
-		std::cout << "Warning! Not enough modes obtained, consider increasing resolution." << std::endl;
+	if(solver.real_freq.size() < nmodes){
+		std::cout << "Not enough modes obtained, consider increasing resolution." << std::endl;
 		return 1;
 	}
 
-	indx = 0;
-	for(int el : modes_select){
+	for(int i = 0; i < nmodes; ++i)
+		frequencies[i] = solver.real_freq[i];
+
+	int indx = 0;
+	for(int mode = 0; mode < nmodes; ++mode){
 		for(int i = 0; i < solver.npoints; ++i){
 			double cos_x = std::cos(solver.diff_matrix.x[i]);
-			profiles[indx++] = std::pow(cos_x, 3.0)*solver.real_eigenvectors[el](3*i);
-			profiles[indx++] = solver.real_eigenvectors[el](3*i+1);
-			profiles[indx++] = std::pow(cos_x, 2.0)*solver.real_eigenvectors[el](3*i+2);
+			profiles[indx++] = std::pow(cos_x, 3.0)*solver.real_eigenvectors[mode](3*i);
+			profiles[indx++] = solver.real_eigenvectors[mode](3*i+1);
+			profiles[indx++] = std::pow(cos_x, 2.0)*solver.real_eigenvectors[mode](3*i+2);
 		}
 	}
+
 
 	return 0;
 }

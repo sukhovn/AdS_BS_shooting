@@ -86,16 +86,31 @@ class Bose_Star_Solver:
 
         self.fields = self.fields.reshape(-1,6)
 
-    def get_perturbation_modes_frequencies(self, nmodes=5, npoints=40):
+    def get_perturbation_modes_frequencies(self, nmodes=5, npoints=40, remove_low_freq_modes=True):
+        if(remove_low_freq_modes):
+            nmodes += 5
+
         self.mode_frequencies = np.zeros(nmodes)
         self.frequency_precision = np.zeros(nmodes)
 
         setup_parameters = np.r_[self.params, [self.omega, self.delta0, self.a0]]
         code = bose_mode_frequency_cpp(self.d, setup_parameters, npoints, self.xrange[0], self.xrange[1], nmodes, self.mode_frequencies, self.frequency_precision)
+
         if(code != 0):
             raise RuntimeError('Mode frequences were not obtained')
 
-    def get_perturbation_modes_profiles(self, nmodes=5, npoints=40):
+        if(remove_low_freq_modes):
+            mask = [True if np.abs(el) > 1.0e-5 else False for el in self.mode_frequencies]
+            self.mode_frequencies = self.mode_frequencies[mask]
+            self.frequency_precision = self.frequency_precision[mask]
+            nmodes -= 5
+            self.mode_frequencies = self.mode_frequencies[:nmodes]
+            self.frequency_precision = self.frequency_precision[:nmodes]
+
+    def get_perturbation_modes_profiles(self, nmodes=5, npoints=40, remove_low_freq_modes=True):
+        if(remove_low_freq_modes):
+            nmodes += 5
+
         self.colloc_coords = 0.25*np.pi*(1.0 - np.cos(np.pi*(0.5+np.arange(npoints))/npoints))
         self.mode_frequencies = np.zeros(nmodes)
         self.mode_profiles = np.zeros(3*nmodes*npoints)
@@ -105,6 +120,14 @@ class Bose_Star_Solver:
         if(code != 0):
             raise RuntimeError('Mode profiles were not obtained')
         self.mode_profiles = self.mode_profiles.reshape(nmodes, npoints, 3)
+
+        if(remove_low_freq_modes):
+            mask = [True if np.abs(el) > 1.0e-5 else False for el in self.mode_frequencies]
+            self.mode_frequencies = self.mode_frequencies[mask]
+            self.mode_profiles = self.mode_profiles[mask]
+            nmodes -= 5
+            self.mode_frequencies = self.mode_frequencies[:nmodes]
+            self.mode_profiles = self.mode_profiles[:nmodes]
 
     def plot_star_profile(self):
         fig = plt.figure(figsize=(12,8))
@@ -168,16 +191,32 @@ class Bose_Star_Manual:
 
         self.fields = self.fields.reshape(-1,6)
 
-    def get_perturbation_modes_frequencies(self, nmodes=5, npoints=40):
+    def get_perturbation_modes_frequencies(self, nmodes=5, npoints=40, remove_low_freq_modes=True):
+        if(remove_low_freq_modes):
+            nmodes += 5
+
         self.mode_frequencies = np.zeros(nmodes)
         self.frequency_precision = np.zeros(nmodes)
 
         setup_parameters = np.r_[self.params, [self.omega, self.delta0, self.a0]]
         code = bose_mode_frequency_cpp(self.d, setup_parameters, npoints, self.xrange[0], self.xrange[1], nmodes, self.mode_frequencies, self.frequency_precision)
+
         if(code != 0):
             raise RuntimeError('Mode frequences were not obtained')
 
-    def get_perturbation_modes_profiles(self, nmodes=5, npoints=40):
+        if(remove_low_freq_modes):
+            mask = [True if np.abs(el) > 1.0e-5 else False for el in self.mode_frequencies]
+            self.mode_frequencies = self.mode_frequencies[mask]
+            self.frequency_precision = self.frequency_precision[mask]
+            nmodes -= 5
+            self.mode_frequencies = self.mode_frequencies[:nmodes]
+            self.frequency_precision = self.frequency_precision[:nmodes]
+
+    def get_perturbation_modes_profiles(self, nmodes=5, npoints=40, remove_low_freq_modes=True):
+        if(remove_low_freq_modes):
+            nmodes += 5
+
+        self.colloc_coords = 0.25*np.pi*(1.0 - np.cos(np.pi*(0.5+np.arange(npoints))/npoints))
         self.mode_frequencies = np.zeros(nmodes)
         self.mode_profiles = np.zeros(3*nmodes*npoints)
 
@@ -185,6 +224,15 @@ class Bose_Star_Manual:
         code = bose_mode_profiles_cpp(self.d, setup_parameters, npoints, self.xrange[0], self.xrange[1], nmodes, self.mode_frequencies, self.mode_profiles)
         if(code != 0):
             raise RuntimeError('Mode profiles were not obtained')
+        self.mode_profiles = self.mode_profiles.reshape(nmodes, npoints, 3)
+
+        if(remove_low_freq_modes):
+            mask = [True if np.abs(el) > 1.0e-5 else False for el in self.mode_frequencies]
+            self.mode_frequencies = self.mode_frequencies[mask]
+            self.mode_profiles = self.mode_profiles[mask]
+            nmodes -= 5
+            self.mode_frequencies = self.mode_frequencies[:nmodes]
+            self.mode_profiles = self.mode_profiles[:nmodes]
 
     def plot_star_profile(self):
         fig = plt.figure(figsize=(12,8))

@@ -79,15 +79,14 @@ int main(int argc, char const *argv[]){
 	solver.summary();
 	// solver.save_real_eigenvalues_csv("eigenvectors.csv");
 
-	std::vector<int> select = {1, 2, 3, 4, 5};
-	std::vector<double> precision(5);
-	solver.eigenvectors_precision(select, precision.data());
+	std::vector<double> precision(6);
+	solver.eigenvectors_precision(6, precision.data());
 
-	for(int i = 0; i < 5; ++i){
-		std::cout << "Estimated spectral precision for eigenvalue " << select[i] << " is " << precision[i] << std::endl;
+	for(int i = 1; i < 6; ++i){
+		std::cout << "Estimated spectral precision for eigenvalue " << i << " is " << precision[i] << std::endl;
 
-		Eigen::VectorXd res = solver.matr_a * solver.real_eigenvectors[select[i]] -
-								solver.real_freq[select[i]]*solver.matr_b * solver.real_eigenvectors[select[i]];
+		Eigen::VectorXd res = solver.matr_a * solver.real_eigenvectors[i] -
+								solver.real_freq[i]*solver.matr_b * solver.real_eigenvectors[i];
 
 		std::cout << "Eigenvector error is: " << res.cwiseAbs().maxCoeff() << '\n' << std::endl;
 	}

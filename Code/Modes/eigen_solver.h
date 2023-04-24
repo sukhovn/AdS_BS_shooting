@@ -181,18 +181,16 @@ public:
 	}
 
 	//Checks decay of spectral coefficients
-	void eigenvectors_precision(const std::vector<int> &selection, double *precision){
-		if(selection.size() == 0)
-			return;
-
+	void eigenvectors_precision(int nmodes, double *precision){
 		double *spectra = new double[size];
 		fftw_r2r_kind kind = FFTW_REDFT10;
 		fftw_plan planCOS = fftw_plan_many_r2r(1, &npoints, nfunc, spectra, NULL, nfunc, 1, spectra, NULL, nfunc, 1, &kind, FFTW_ESTIMATE);
 
 		int indx = 0;
-		for(int el : selection){
+
+		for(int mode = 0; mode < nmodes; ++mode){
 			for(int i = 0; i < size; ++i){
-				spectra[i] = real_eigenvectors[el](i);
+				spectra[i] = real_eigenvectors[mode](i);
 			}
 
 			fftw_execute_r2r(planCOS, spectra, spectra);
