@@ -62,9 +62,10 @@ int main(int argc, char const *argv[]){
 		}
 	}
 
+	int nfunc_save = 7;
 	int npoints = 501;
 	double *xarr = new double[npoints];
-	double *yarr = new double[6*npoints];
+	double *yarr = new double[nfunc_save*npoints];
 
 	Boson_Star_Solver solver(3, 1.0, omega, phi0, 0.001, 1.3);
 	solver.bstar.el = el;
@@ -94,7 +95,7 @@ int main(int argc, char const *argv[]){
 	std::cout << "Omega found: " << solver.bstar.omega << std::endl;
 	
 	solver.integrate_bose_star(npoints, xarr, yarr);
-	save_grid("Data/solution.dat", 6, npoints, xarr, yarr);
+	save_grid("Data/solution.dat", nfunc_save, npoints, xarr, yarr);
 
 	delete [] xarr;
 	delete [] yarr;

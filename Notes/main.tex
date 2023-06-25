@@ -284,4 +284,33 @@ This cubic equation can be solved for $\phi_0$ after which $\delta_0$ is obtaine
 	\delta_0 = \delta(\rho) - b_3 \phi_0^2,
 \end{equation}
 and $A_0$ can be found from the expression \eqref{eq:A_asym_expr}.
+
+\section{Misner-Sharp mass}
+We can express mass directly from the equation for the metric function $A(x)$
+\begin{equation}
+	A'(x) = - \frac{d - 2 \cos^2 x}{\sin x \cos x}\left(A - 1\right) - \frac{2 L^2\tan x}{d-1}\kappa \rho.
+\end{equation}
+This equation can be solved explicitly as
+\begin{equation}
+	A(x) = 1 - \frac{2 l^2 \kappa}{d-1}\frac{\cos^2 x}{\tan^{d-2} x} \int_0^x \frac{\tan^{d-1}x}{\cos^2 x} \rho dx.
+\end{equation}
+Comparing this solution with formulas \eqref{eq:PointCharge} we get the expression for mass
+\begin{equation}
+	\begin{split}
+		&M = \frac{\kappa l^d}{d-1} \int_0^{\pi/2} \frac{\tan^{d-1}x}{\cos^2 x} \rho dx = \\
+		&\frac{\kappa l^d}{d-1} \int_0^{\pi/2} \frac{\tan^{d-1}x}{\cos^2 x} \left[\frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2 \phi_0^2 + A(\phi_0')^2\right) + V + \frac{\cos^4 x}{2l^4} e^{2\delta} (a')^2\right] dx,
+	\end{split}
+\end{equation}
+the second electromagnetic field term naturally dies out as $x\to \pi/2$.
+
+In order to evaluate this integral we will require the asymptotic of the integrand in terms of powers of $\rho = \frac{\pi}{2} - x$
+\begin{equation}
+	\begin{split}
+		&\frac{\tan^{d-1}x}{\cos^2 x} \left[\frac{\cos^2 x}{l^2}\left(\frac{1}{A}e^{2\delta}(\omega - e a)^2
+		\phi_0^2 + A(\phi_0')^2\right) + V + \frac{\cos^4 x}{2l^4} e^{2\delta} (a')^2\right] = \\
+		&\rho^{d-3}\frac{e^{2\delta_0} (d-2)^2 (a^{(1)})^2 }{2 L^4}\left(1 + \frac{d}{2} \rho^2\right) + \rho^{2n - d - 1} \frac{(\phi^{(0)})^2}{L^2}\bigg[n(2n - d) + \\
+		&\left(\frac{1}{3}n(d^2 - nd + n^2 + n - 2d) - e^{2\delta_0}(n-1)(\omega - e a_0)^2\right)\rho^2 - \frac{1}{2} n^2 (n + d - 2)A^{(0)}\rho^d\bigg].
+	\end{split}
+\end{equation}
+
 \end{document}

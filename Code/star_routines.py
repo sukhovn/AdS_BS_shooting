@@ -77,14 +77,14 @@ class Bose_Star_Solver:
 
     def get_star_profile(self, npoints=501):
         self.coords = np.linspace(0.0, np.pi/2.0, npoints)
-        self.fields = np.zeros(6*npoints)
+        self.fields = np.zeros(7*npoints)
 
         setup_parameters = np.r_[self.params, [self.omega, self.delta0, self.a0]]
         code = get_star_profile_cpp(self.d, setup_parameters, self.xrange[0], self.xrange[1], npoints, self.coords, self.fields)
         if(code != 0):
             raise RuntimeError('No star profile was obtained')
 
-        self.fields = self.fields.reshape(-1,6)
+        self.fields = self.fields.reshape(-1,7)
 
     def get_perturbation_modes_frequencies(self, nmodes=5, npoints=40, remove_low_freq_modes=True):
         if(remove_low_freq_modes):
@@ -182,14 +182,14 @@ class Bose_Star_Manual:
 
     def get_star_profile(self, npoints=501):
         self.coords = np.linspace(0.0, np.pi/2.0, npoints)
-        self.fields = np.zeros(6*npoints)
+        self.fields = np.zeros(7*npoints)
 
         setup_parameters = np.r_[self.params, [self.omega, self.delta0, self.a0]]
         code = get_star_profile_cpp(self.d, setup_parameters, self.xrange[0], self.xrange[1], npoints, self.coords, self.fields)
         if(code != 0):
             raise RuntimeError('No star profile was obtained')
 
-        self.fields = self.fields.reshape(-1,6)
+        self.fields = self.fields.reshape(-1,7)
 
     def get_perturbation_modes_frequencies(self, nmodes=5, npoints=40, remove_low_freq_modes=True):
         if(remove_low_freq_modes):

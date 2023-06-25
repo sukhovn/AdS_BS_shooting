@@ -68,6 +68,13 @@ public:
 		dy[5] = - (dy[1] + (2*cosx*cosx + d - 3.0)/(sinx*cosx))*y[5] - 2.0*el*(omega - el*y[4])*SQR(l*y[2]/cosx)/y[0];
 	}
 
+	double energy_density(const double x, const double *y) const{
+		double cosx = std::cos(x), tanx = std::tan(x);
+		double expdel = std::exp(2.0*y[1]);
+		return std::pow(tanx, d-1)*((expdel/y[0]*SQR((omega - el*y[4])*y[2]) + y[0]*y[3]*y[3])/(l*l) +
+					vpot(y[2]*y[2])/(cosx*cosx) + SQR(y[5]*cosx)*expdel/(2.0*l*l*l*l));
+	}
+
 	struct Origin_Asymptotic{
 		double del0;
 		double phi0;
@@ -132,6 +139,8 @@ public:
 	struct Boundary_Asymptotic{
 		double da;
 		double np;
+		double la;
+		double omega_shift;
 
 		double rho;
 
@@ -158,6 +167,8 @@ public:
 
 		Boundary_Asymptotic(const Boson_Star_AdS &bstar){
 			da = bstar.d;
+			la = bstar.l;
+
 			rho = M_PI_2 - bstar.x;
 			double tmp = bstar.dvpot(0.0), tmpem;
 			np = 0.5*(da + std::sqrt(SQR(da) + 4.0*tmp*SQR(bstar.l)));
@@ -178,9 +189,10 @@ public:
 				b4 = bstar.kappa*(da - 2.0)/(SQR(bstar.l)*(da - 1.0));
 			}
 
+			omega_shift = bstar.omega - bstar.el*a0;
 			// Determining scalar field asymptotic coefficients
 			b1 = np*(np + da - 2.0)/(6.0*(2.0*(np + 1.0) - da));
-			b2 = SQR((bstar.omega - bstar.el*a0))/(4.0*(np + 1.0) - 2.0*da);
+			b2 = SQR(omega_shift)/(4.0*(np + 1.0) - 2.0*da);
 			b3 = bstar.kappa*np/(da - 1.0);
 			b5 = 2.0*bstar.kappa*np*np/(2.0*np - da)/(da - 1.0);
 
@@ -238,6 +250,19 @@ public:
 				ya[4] = 0.0;
 				ya[5] = 0.0;
 			}
+		}
+
+		double evaluate_energy_density(double xa){
+			double rhoa = M_PI_2 - xa;
+			double phi_part = std::pow(rhoa, 2*np-da-1)/std::pow(rho, 2*np)*phi0*phi0/(la*la)*(np*(2.0*np-da) +
+								(np*(da*da - np*da + np*np + np - 2.0*da)/3.0 - std::exp(2.0*del0)*(np-1)*omega_shift*omega_shift)*rhoa*rhoa -
+								0.5*np*np*(np + da - 2.0)*A0*std::pow(rhoa/rho, da));
+			double em_part = 1.0/std::pow(rho, 2*da-4)*std::exp(2.0*del0)*SQR((da-2)*a1)/(2.0*la*la*la*la)*(1.0 + 0.5*da*rhoa*rhoa);
+			if(rhoa < 1.0e-10 && da == 3.0)
+				return em_part + phi_part;
+			em_part = std::pow(rhoa, da-3)*em_part;
+
+			return em_part + phi_part;
 		}
 	};
 };
